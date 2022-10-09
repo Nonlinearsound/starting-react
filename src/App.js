@@ -1,5 +1,4 @@
 import './App.css';
-import Pokemon from './pokemon.json'
 import PropTypes from 'prop-types'
 import React from 'react';
 
@@ -90,6 +89,13 @@ PokemonInfo.propTypes = {
 function App() {
   const [filter,filterSet] = React.useState("");
   const [selectedItem, selectedItemSet] = React.useState(null);
+  const [Pokemon,PokemonSet] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("http://localhost:3000/starting-react/pokemon.json")
+      .then(response => response.json())
+      .then(data => PokemonSet(data));
+  },[]);
 
   return( 
     <div 
