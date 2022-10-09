@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
-import PokemonContext from '../PokemonContext';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 // PokemonInfo als zusätzliche Komponente, die die Objekt-Elemente der "base"-Eigenschaft
 // des Pokemon-Objekts anzeigt.
@@ -12,9 +12,7 @@ import PokemonContext from '../PokemonContext';
 // Object.assign() - kopiert einfach alle enumerierbaren properties der Proplist des Objektes auf ein anders (ne shallow copy sozusagen)
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 const PokemonInfo = () => {
-    const { 
-        state: {selectedItem},
-    } = useContext(PokemonContext)
+    const selectedItem = useSelector(state => state.selectedItem);
     // dispatch is not being used here, we only show stuff
 
     return selectedItem ? (
