@@ -24,7 +24,13 @@ const PokemonRow = ({pokemon, onSelect}) => (
       </Repeat>
     </td>
     <td>
-      <Button variant="outlined" size="small" color="success" onClick={() => onSelect(pokemon)}>Select</Button>
+      <Button 
+        variant="outlined" 
+        size="small" 
+        color="success" 
+        onClick={() => onSelect(pokemon)}>
+      Select
+      </Button>
     </td>
   </tr>
 );

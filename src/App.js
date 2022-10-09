@@ -18,27 +18,53 @@ const AppContainer = styled.div `
   padding-top: 1rem;
 `;
 
+const pokemonReducer = (state,action) => {
+  switch( action.type ) {
+    case "SET_FILTER":
+      return {
+        ...state,
+        filter: action.payload,
+      };
+    case "SET_POKEMON":
+      return {
+        ...state,
+        pokemon: action.payload,
+      };
+    case "SET_SELECTED_ITEM":
+      return {
+        ...state,
+        selectedItem: action.payload,
+      };
+    default:
+      throw new Error("No action for reducer");
+  }
+}
 
 function App() {
-  const [filter,filterSet] = React.useState("");
-  const [selectedItem, selectedItemSet] = React.useState(null);
-  const [pokemon,pokemonSet] = React.useState([]);
+  const [state,dispatch] = React.useReducer(pokemonReducer,{
+    pokemon: [],
+    filter: "",
+    selectedItem: null
+  });
 
   React.useEffect(() => {
     fetch("http://localhost:3000/starting-react/pokemon.json")
       .then(response => response.json())
-      .then(data => pokemonSet(data));
+      .then((data) => dispatch({
+        type: "SET_POKEMON",
+        payload: data
+      }));
   },[]);
+
+  if(!state.pokemon){
+    return <div>Loading data</div>
+  }
 
   return( 
     <PokemonContext.Provider
       value={{
-        filter,
-        filterSet,
-        selectedItem,
-        selectedItemSet,
-        pokemon,
-        pokemonSet
+        state,
+        dispatch
       }}
     >
       <AppContainer>

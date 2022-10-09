@@ -12,7 +12,11 @@ import PokemonContext from '../PokemonContext';
 // Object.assign() - kopiert einfach alle enumerierbaren properties der Proplist des Objektes auf ein anders (ne shallow copy sozusagen)
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 const PokemonInfo = () => {
-    const { selectedItem } = useContext(PokemonContext)
+    const { 
+        state: {selectedItem},
+    } = useContext(PokemonContext)
+    // dispatch is not being used here, we only show stuff
+
     return selectedItem ? (
         <div>
             <h1>{selectedItem.name.english}</h1>
