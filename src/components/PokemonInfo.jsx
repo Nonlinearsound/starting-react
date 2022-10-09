@@ -12,20 +12,20 @@ import PokemonContext from '../PokemonContext';
 // Object.assign() - kopiert einfach alle enumerierbaren properties der Proplist des Objektes auf ein anders (ne shallow copy sozusagen)
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 const PokemonInfo = () => {
-    const { selectedItem: {name, base}} = useContext(PokemonContext)
-    return (
+    const { selectedItem } = useContext(PokemonContext)
+    return selectedItem ? (
         <div>
-            <h1>{name.english}</h1>
+            <h1>{selectedItem.name.english}</h1>
             <table>
-            {Object.keys(base).map((key) => (
+            {Object.keys(selectedItem.base).map((key) => (
                 <tr key={key}>
                     <td>{key}</td>
-                    <td>{base[key]}</td>
+                    <td>{selectedItem.base[key]}</td>
                 </tr>
             ))}
             </table>
         </div>
-    );
+    ) : null;
 };
 
 PokemonInfo.propTypes = {

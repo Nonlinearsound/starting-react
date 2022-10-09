@@ -48,9 +48,7 @@ function App() {
           <div>
             <PokemonTable/>
           </div>
-          {selectedItem && (
             <PokemonInfo />
-          )}
         </DataRow>
       </AppContainer>
     </PokemonContext.Provider>
