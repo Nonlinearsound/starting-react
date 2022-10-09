@@ -1,6 +1,7 @@
 import './App.css';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import React from 'react';
+import styled from '@emotion/styled';
 
 // This is a React component, called "Repeat"
 // This function will create numTimes children of this React component
@@ -14,6 +15,24 @@ function Repeat(props){
   }}>{items}</div>
 }
 
+const RepeatDisplay = styled.div `
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  border-radius: 50%;
+  margin-right: 2px;
+`;
+const DataRow = styled.tr `
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-column-gap: 1rem;
+`;
+const AppContainer = styled.div `
+  margin: auto;
+  width: 800px;
+  padding-top: 1rem;
+`;
+
 const PokemonRow = ({pokemon, onSelect}) => (
   <tr>
     <td>{pokemon.name.english}</td>
@@ -21,13 +40,7 @@ const PokemonRow = ({pokemon, onSelect}) => (
     <td>
       <Repeat numTimes={pokemon.base.HP/10}>
         {(index) => ( 
-          <div key={index} style={{
-            width:6,
-            height:6,
-            backgroundColor: "red",
-            borderRadius: "50%",
-            marginRight: 2
-          }}></div> 
+          <RepeatDisplay key={index}></RepeatDisplay> 
         )}
       </Repeat>
     </td>
@@ -98,19 +111,10 @@ function App() {
   },[]);
 
   return( 
-    <div 
-      style={{
-        margin: "auto",
-        widh: 800,
-        paddingTop: "1rem",
-      }}>
+    <AppContainer>
       <h1 className='title'>Pokemon Search</h1>
       <input onChange={(evt) => filterSet(evt.target.value)} value={filter} />
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "70% 30%",
-        gridColumnGap: "1rem"
-      }}>
+      <DataRow>
         <div>
           <table width="100%">
             <thead>
@@ -131,8 +135,8 @@ function App() {
         {selectedItem && (
           <PokemonInfo {... selectedItem} />
         )}
-      </div>
-    </div>
+      </DataRow>
+    </AppContainer>
   );
 }
 
